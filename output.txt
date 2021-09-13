@@ -1,0 +1,99 @@
+--------
+Part 1:
+--------
+
+
+
+command: mpiexec -n 3 python part1.py 6
+
+output: This is the  6 x 1 vector.
+
+[[ 0.94458346]
+
+ [ 0.75409607]
+
+ [ 0.55208766]
+
+ [ 0.33111795]
+
+ [ 0.76468288]
+
+ [ 0.67943008]]
+
+
+
+
+
+--------
+Part 2:
+--------
+
+
+
+command: mpiexec -n 4 python part2.py 3
+
+output: the program crashed when we change the dest, source and tag parameter to a wrong value.
+We can use several send and receive function in one process. The tag parameter will differentiate the send and receive function.
+
+
+
+
+
+
+--------
+Part 3:
+--------
+
+
+
+command: mpiexec -n 10 python part3.py 4
+
+output: This is the  4 x 1 vector from process  9
+
+[[ 0.2917096 ]
+
+ [ 0.96256824]
+
+ [ 0.54186566]
+
+ [ 0.47561439]]
+
+If every process call Send() first, there will be no problem.
+
+
+
+
+
+--------
+Part 4:
+--------
+
+
+
+command: mpiexec -n 4 python part4.py 0 1 10000003
+
+output: With n = 10000003 trapezoids, our estimate of the integral from 0.0 to 1.0 is [ 0.3333332]
+
+
+
+if n%size == 0:
+
+  local_n = n/size
+
+else:
+
+  if ((rank)<(n%size)):
+
+    local_n = math.floor(n/size)+1
+
+    #print rank, local_n
+
+  else:
+
+    local_n = math.floor(n/size)
+
+    #print rank, local_n
+
+
+    
+adding this code will help to solve the load balancing problem.
